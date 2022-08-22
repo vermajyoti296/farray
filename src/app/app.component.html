@@ -1,0 +1,52 @@
+<!-- <h2>LOGIN FORM</h2>
+<form [formGroup]="loginForm" (ngSubmit)="OnSubmit()">
+  <input  formControlName="email" placeholder="Email" required/><br>
+  <div style="color: red;" *ngIf="this.submitted && f.email.errors.required">Email is required</div>
+  <div style="color: red;" *ngIf="this.submitted && f.email.errors.email">Please enter a valid email</div>
+  <br>
+<input formControlName="password" placeholder="Password" required/><br>
+<div style="color: red;" *ngIf="this.submitted && f.password.errors.required">Password is required</div>
+<br>
+ <button  type="submit">Submit</button>
+ <div formArrayName="hobbies">
+ <button type="button" (click)="onhobby()">Add Hobby</button>
+ 
+ <div *ngFor="let control of hobbies; let i= index" >
+  <button type="button" (click)="removeitem(i)" > Remove Hobby</button>
+  <input type="text" ></div>
+ </div>
+</form> -->
+<form [formGroup]="skillsForm" (ngSubmit)="onSubmit()">
+
+  <p>
+    <label for="name">Name </label>
+    <input type="text" id="name" name="name" formControlName="name">
+  </p>
+
+
+  Skills:
+  <div formArrayName="skills">
+    <div *ngFor="let skill of skills.controls; let i=index">
+      <div [formGroupName]="i">
+        {{i}}
+        skill name :
+        <input type="text" formControlName="skill">
+        exp:
+        <input type="text" formControlName="exp">
+        <button (click)="removeSkill(i)">Remove</button>
+      </div>
+    </div>
+  </div>
+
+  <p>
+    <button type="submit">Submit</button>
+  </p>
+
+</form>
+
+
+<p>
+  <button type="button" (click)="addSkills()">Add</button>
+</p>
+
+{{this.skillsForm.value | json}}
